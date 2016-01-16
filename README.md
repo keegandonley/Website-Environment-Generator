@@ -46,10 +46,10 @@ the automatically generated CSS and JS files.
 Certian packages (i.e. bootstrap and reactJS) require multiple files, and some CSS and JavaScript. For these, I have a second set of conditions that don't return anything and simply download the files and create directories directly. 
 <pre>
 if package.lower() == "bootstrap":
-                os.makedirs(projectname + "/assets/css/" + package)
-                print("Downloading Bootstrap from maxcdn...")
-                urllib.urlretrieve('https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css', projectname + '/assets/css/' + package + '/bootstrap.min.css')
-                urllib.urlretrieve('https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js', projectname + '/assets/js/packages/' + package + '/bootstrap.min.js')
-                css.append('/assets/css/' + package + '/bootstrap.min.css')
-                scripts.append('/assets/js/packages/' + package + '/bootstrap.min.js')
+    os.makedirs(projectname + "/assets/css/" + package)
+    print("Downloading Bootstrap from maxcdn...")
+    urllib.urlretrieve('https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css', projectname + '/assets/css/' + package + '/bootstrap.min.css')
+    urllib.urlretrieve('https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js', projectname + '/assets/js/packages/' + package + '/bootstrap.min.js')
+    css.append('/assets/css/' + package + '/bootstrap.min.css')
+    scripts.append('/assets/js/packages/' + package + '/bootstrap.min.js')
 </pre>
