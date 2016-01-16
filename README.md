@@ -1,11 +1,11 @@
 # Website Environment Generator
 This is a very basic program to build website folder heirarchies automatically, to simplify the process of starting simple projects.
 
-Certain libraries can be downloaded automatically; the full list is given below. For any library currently not supported, 
+Certain libraries can be downloaded automatically; the full list is given below. For any library currently not supported,
 an empty folder will be created in which you may place the files manually. Library files are downloaded from the owners of the libraries.
 
 #### Currently supported libraries:
-- React JS 
+- React JS
 - Bootstrap (CSS and JS)
 - Isotope
 
@@ -24,7 +24,7 @@ def check_for_library_match(package):
         return None
 </pre>
 The argument taken by <code>check_for_library</code> is a forced-lowercase string of whatever package is typed when prompted. Adding an all-lowercase condition as
-an elif statement in the same format will allow more libraries to be downloaded. The logic will then format the URL for use once the 
+an elif statement in the same format will allow more libraries to be downloaded. The logic will then format the URL for use once the
 function returns.
 For example:
 <pre>
@@ -39,11 +39,11 @@ Once you are finished entering libraries, simply type <code>none</code> to end. 
 - site.js
 - site.css
 
-<code>index.html</code> will be automatically set up with HTML5 elements, and all the libraries are automatically added, inclduing 
+<code>index.html</code> will be automatically set up with HTML5 elements, and all the libraries are automatically added, inclduing
 the automatically generated CSS and JS files.
 
 ##### Current workarounds
-Certian packages (i.e. bootstrap and reactJS) require multiple files, and some CSS and JavaScript. For these, I have a second set of conditions that don't return anything and simply download the files and create directories directly. 
+Certian packages (i.e. bootstrap and reactJS) require multiple files, and some CSS and JavaScript. For these, I have a second set of conditions that don't return anything and simply download the files and create directories directly.
 <pre>
 if package.lower() == "bootstrap":
     os.makedirs(projectname + "/assets/css/" + package)
@@ -53,3 +53,6 @@ if package.lower() == "bootstrap":
     css.append('/assets/css/' + package + '/bootstrap.min.css')
     scripts.append('/assets/js/packages/' + package + '/bootstrap.min.js')
 </pre>
+
+Changing the file location: The script will always navigate to your <code>/Docmuments/</code> folder. To change this, you can change
+<code>folderlocation = 'Documents'</code> to something other than Documents, such as Desktop, Downloads, etc. Currently, these are the only directories that can be easily accessed.

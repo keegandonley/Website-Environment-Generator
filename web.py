@@ -8,6 +8,9 @@ import urllib
 
 def main():
     projectname = raw_input("Enter your project name: ")
+    while len(projectname) <= 0:
+        print("Please enter a valid project name!")
+        projectname = raw_input("Enter your project name: ")
     folderlocation = 'Documents'
     rootdir = get_root_dir
     while rootdir != os.getcwd():
@@ -54,7 +57,6 @@ def main():
     print("Project successfully created at: " + os.getcwd())
 
 
-
 def get_root_dir():
     currentdir = os.getcwd()
     currentdir = currentdir.split('/')
@@ -72,6 +74,7 @@ def check_for_library_match(package):
         return 'http://cdnjs.cloudflare.com/ajax/libs/jquery.isotope/2.2.2/isotope.pkgd.min.js'
     else:
         return None
+
 
 def create_files(projectname, scripts, css):
     os.chdir(projectname)
@@ -103,5 +106,6 @@ def create_css_file():
     cssFile = open("site.css", "w")
     cssFile.write("// auto generated CSS file, automatically added to index.html")
     cssFile.close()
+
 
 main()
