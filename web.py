@@ -67,8 +67,6 @@ def check_for_library_match(package):
     if package == "jquery":
         print("Downloading jQuery 1.12.0 from http://code.jquery.com/jquery-1.12.0.js...")
         return 'http://code.jquery.com/jquery-1.12.0.js'
-    elif package == "jquery-ui":
-        print()
     elif package == "isotope":
         print("Downloading isotopeJS 2.2.2 from cdnjs...")
         return 'http://cdnjs.cloudflare.com/ajax/libs/jquery.isotope/2.2.2/isotope.pkgd.min.js'
@@ -85,7 +83,7 @@ def create_files(projectname, scripts, css):
         htmlFile.write("    <script src='" + scripts[i] + "'></script>\n")
     for i in range(len(css)):
         htmlFile.write("    <link rel='stylesheet' href='" + css[i] + "'>\n")
-    htmlFile.write("    <link rel='stylesheet' href='/assets/css/site.css'>")
+    htmlFile.write("    <link rel='stylesheet' href='/assets/css/site.css'>\n")
     htmlFile.write("</head>\n<body>\n\n</body>\n</html>")
     htmlFile.close()
     create_js_file()
