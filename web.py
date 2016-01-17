@@ -76,6 +76,9 @@ def check_for_library_match(package):
     elif package == "isotope":
         print("Downloading isotopeJS 2.2.2 from cdnjs...")
         return 'http://cdnjs.cloudflare.com/ajax/libs/jquery.isotope/2.2.2/isotope.pkgd.min.js'
+    elif package == "angular":
+        print("Downloading AngularJS 1.4.8 from googleapis.com...")
+        return("https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js")
     else:
         return None
 
@@ -122,6 +125,7 @@ def display_help(projectname):
     print(" * Bootstrap")
     print(" * React")
     print(" * Isotope")
+    print(" * Angular")
     print("Currently, dependencies aren't taken into account for,")
     print("so jQuery must be installed first if it is needed by any")
     print("other libraries.\n")
