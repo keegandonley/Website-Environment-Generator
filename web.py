@@ -32,13 +32,17 @@ def main():
     while rootdir != os.getcwd():
         os.chdir(os.pardir)
         rootdir = get_root_dir()
-
     os.chdir(folderlocation)
-    os.makedirs(projectname + "/assets/js/")
-    os.makedirs(projectname + "/assets/css/")
-    os.makedirs(projectname + "/assets/img/")
 
     # Attempt to set up the basic folder heirarchy
+    try:
+        os.makedirs(projectname + "/assets/js/")
+        os.makedirs(projectname + "/assets/css/")
+        os.makedirs(projectname + "/assets/img/")
+    except OSError as e:
+        print(colors.FAIL + "The selected folder already exists, and can't be overwritten" + colors.ENDC)
+        exit()
+
     # Loop to input all packages the user desires, and download the package if supported
     package = raw_input("Enter a package name to add, 'none' to finish, or 'help': ")
     scripts = []
