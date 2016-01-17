@@ -130,10 +130,14 @@ def create_files(projectname, scripts, css):
     os.chdir(projectname)
     htmlFile = open("index.html", "w")
     htmlFile.write("<!DOCTYPE html>\n<html>\n<head>\n")
+    htmlFile.write('    <meta charset="utf-8">\n')
     htmlFile.write("    <title>" + projectname + "</title>\n\n")
+    htmlFile.write("    <!-- Scripts -->\n")
     htmlFile.write("    <script src='assets/js/site.js'></script>\n")
     for i in range(len(scripts)):
         htmlFile.write("    <script src='" + scripts[i] + "'></script>\n")
+    htmlFile.write("\n")
+    htmlFile.write("    <!-- CSS -->\n")
     for i in range(len(css)):
         htmlFile.write("    <link rel='stylesheet' href='" + css[i] + "'>\n")
     htmlFile.write("    <link rel='stylesheet' href='assets/css/site.css'>\n")
@@ -149,6 +153,7 @@ def create_js_file():
     os.chdir("assets")
     os.chdir("js")
     jsFile = open("site.js", "w")
+    jsFile.write("// auto generated Javascript file, automatically added to index.html ")
     jsFile.close()
     create_css_file()
 
@@ -160,7 +165,7 @@ def create_css_file():
     os.chdir(os.pardir)
     os.chdir("css")
     cssFile = open("site.css", "w")
-    cssFile.write("// auto generated CSS file, automatically added to index.html")
+    cssFile.write("/* auto generated CSS file, automatically added to index.html */")
     cssFile.close()
 
 
