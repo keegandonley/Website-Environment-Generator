@@ -6,12 +6,23 @@ import os
 import urllib
 import shutil
 
+# The colors used for highlighting text output
+class colors:
+    HEADER = '\033[95m'
+    OKBLUE = '\033[94m'
+    OKCYAN = '\033[96m'
+    OKGREEN = '\033[92m'
+    WARNING = '\033[93m'
+    FAIL = '\033[91m'
+    LOG = '\033[90m'
+    ENDC = '\033[0m'
+
 
 def main():
     print_welcome()
     projectname = raw_input("Enter your project name: ")
     while len(projectname) <= 0:
-        print("Please enter a valid project name!")
+        print(colors.FAIL + "Please enter a valid project name!" + colors.ENDC)
         projectname = raw_input("Enter your project name: ")
     folderlocation = 'Documents'
     rootdir = get_root_dir
@@ -40,14 +51,14 @@ def main():
             # CSS and JS folders
             if package.lower() == "bootstrap":
                 os.makedirs(projectname + "/assets/css/" + package)
-                print("Downloading Bootstrap from maxcdn...")
+                print(colors.LOG + "Downloading Bootstrap from maxcdn..." + colors.ENDC)
                 urllib.urlretrieve('https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css', projectname + '/assets/css/' + package + '/bootstrap.min.css')
                 urllib.urlretrieve('https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js', projectname + '/assets/js/packages/' + package + '/bootstrap.min.js')
                 css.append('assets/css/' + package + '/bootstrap.min.css')
                 scripts.append('assets/js/packages/' + package + '/bootstrap.min.js')
             # React behaves the same way as bootstrap, with 2 JS files
             if package.lower() == "react":
-                print("Downloading react and react dom 0.14.6 from fb.me...")
+                print(colors.LOG + "Downloading react and react dom 0.14.6 from fb.me..." + colors.ENDC)
                 urllib.urlretrieve('https://fb.me/react-with-addons-0.14.6.js', projectname + '/assets/js/packages/' + package + '/react-with-addons-0.14.6.js')
                 urllib.urlretrieve('https://fb.me/react-dom-0.14.6.js', projectname + '/assets/js/packages/' + package + '/react-dom-0.14.6.js')
                 scripts.append('assets/js/packages/' + package + '/react-with-addons-0.14.6.js')
@@ -62,11 +73,11 @@ def main():
                 urllib.urlretrieve(librarymatch, projectname + '/assets/js/packages/' + package + '/' + filename)
                 scripts.append('assets/js/packages/' + package + '/' + filename)
             elif librarymatch == None and package.lower() != "bootstrap" and package.lower() != "react":
-                print("No file found to download... Don't forget to manually add the files needed.")
+                print(colors.WARNING + "No file found to download... Don't forget to manually add the files needed." + colors.ENDC)
         elif package.lower() == "help" or package.lower() == "h":
             display_help(projectname)
         else:
-            print("Please enter none or a valid string!")
+            print(colors.FAIL + "Please enter 'none' or a valid string!" + colors.ENDC)
         package = raw_input("Enter a package name to add, 'none' to finish, or 'help': ")
     create_files(projectname, scripts, css)
     os.chdir(os.pardir)
@@ -93,13 +104,13 @@ def check_for_library_match(package):
     '''
     # TODO: load these names and urls from an external file
     if package == "jquery":
-        print("Downloading jQuery 1.12.0 from http://code.jquery.com/jquery-1.12.0.js...")
+        print(colors.LOG + "Downloading jQuery 1.12.0 from http://code.jquery.com/jquery-1.12.0.js..." + colors.ENDC)
         return 'http://code.jquery.com/jquery-1.12.0.js'
     elif package == "isotope":
-        print("Downloading isotopeJS 2.2.2 from cdnjs...")
+        print(colors.LOG + "Downloading isotopeJS 2.2.2 from cdnjs..." + colors.ENDC)
         return 'http://cdnjs.cloudflare.com/ajax/libs/jquery.isotope/2.2.2/isotope.pkgd.min.js'
     elif package == "angular":
-        print("Downloading AngularJS 1.4.8 from googleapis.com...")
+        print(colors.LOG + "Downloading AngularJS 1.4.8 from googleapis.com..." + colors.ENDC)
         return("https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js")
     else:
         return None
@@ -198,11 +209,11 @@ def print_welcome():
     Print the welcome screen for the user.
     '''
     os.system('clear')
-    print("------------- Web Heirarchy Generator ------------")
+    print(colors.OKBLUE + "------------- Web Heirarchy Generator ------------")
     print("By Keegan Donley\n")
     print("Please begin by entering the desired name of your")
     print("new site's root directory.")
-    print("--------------------------------------------------\n")
+    print("--------------------------------------------------\n" + colors.ENDC)
 
 def save_setup(projectname):
     '''
@@ -216,20 +227,20 @@ def save_setup(projectname):
         print("Please enter yes or no!")
         save = raw_input("Type yes to save your work, or no to discard this configuration: ")
     if save.lower() == "yes" or save.lower() == "y":
-        print("Project successfully created at: " + os.getcwd())
+        os.system('clear')
+        print(colors.OKGREEN + "\nProject successfully created at: " + os.getcwd() + "\n" + colors.ENDC)
     elif save.lower() == "no" or save.lower() == "n":
-        print("\n--------------------------------------------------------")
-        print("WARNING! You're about to discard your current work")
-        print("--------------------------------------------------------\n")
+        print(colors.FAIL + "\n--------------------------------------------------------" + colors.ENDC)
+        print(colors.FAIL + "WARNING! You're about to discard your current work" + colors.ENDC)
+        print(colors.FAIL + "--------------------------------------------------------\n" + colors.ENDC)
         confirmation = raw_input("Please type deletedelete in order to confirm: ")
         if confirmation.lower() == "deletedelete":
             os.chdir(os.pardir)
             shutil.rmtree(projectname)
             os.system('clear')
-            print("\nProject " + projectname + " successfully deleted\n")
+            print(colors.OKGREEN + "\nProject " + projectname + " successfully deleted\n" + colors.ENDC)
         else:
-            print("\nConfirmation phrase incorrect.")
-            print("Project successfully created at: " + os.getcwd())
-
+            print(colors.WARNING + "\nConfirmation phrase incorrect." + colors.ENDC)
+            print(colors.OKGREEN + "Project successfully created at: " + os.getcwd() + colors.ENDC)
 
 main()
