@@ -229,15 +229,14 @@ def save_setup(projectname):
     Prompts to save or delete the current configuration.
     parameter: projectname (string): the name of the project entered by the user
     '''
-    os.system('clear')
-    print("\nAlmost done!")
+    print("Almost done!")
     save = raw_input("Type yes to save your work, or no to discard this configuration: ")
     while save != "yes" and save != "no":
         print("Please enter yes or no!")
         save = raw_input("Type yes to save your work, or no to discard this configuration: ")
     if save.lower() == "yes" or save.lower() == "y":
         os.system('clear')
-        print(colors.OKGREEN + "\nProject successfully created at: " + os.getcwd() + "\n" + colors.ENDC)
+        print(colors.OKGREEN + "Project successfully created at: " + os.getcwd() + colors.ENDC)
     elif save.lower() == "no" or save.lower() == "n":
         print(colors.FAIL + "\n--------------------------------------------------------" + colors.ENDC)
         print(colors.FAIL + "WARNING! You're about to discard your current work" + colors.ENDC)
@@ -247,7 +246,7 @@ def save_setup(projectname):
             os.chdir(os.pardir)
             shutil.rmtree(projectname)
             os.system('clear')
-            print(colors.OKGREEN + "\nProject " + projectname + " successfully deleted\n" + colors.ENDC)
+            print(colors.OKGREEN + "Project " + projectname + " successfully deleted" + colors.ENDC)
         else:
             print(colors.WARNING + "\nConfirmation phrase incorrect." + colors.ENDC)
             print(colors.OKGREEN + "Project successfully created at: " + os.getcwd() + colors.ENDC)
