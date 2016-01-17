@@ -1,5 +1,9 @@
 # Website Environment Generator
+Python version: <code>2.7.10</code>
+
 This is a very basic program to build website folder heirarchies automatically, to simplify the process of starting simple projects.
+
+To run this script, navigate to the proper directory, and run <code>python web.py</code>
 
 Certain libraries can be downloaded automatically; the full list is given below. For any library currently not supported,
 an empty folder will be created in which you may place the files manually. Library files are downloaded from the owners of the libraries.
