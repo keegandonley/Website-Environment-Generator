@@ -15,6 +15,9 @@ def main():
         projectname = raw_input("Enter your project name: ")
     folderlocation = 'Documents'
     rootdir = get_root_dir
+
+    # Set the working directory to /Users/<username>/Documents
+    # Only works currently if the script is run from a folder located below /Users/<username>/
     while rootdir != os.getcwd():
         os.chdir(os.pardir)
         rootdir = get_root_dir()
@@ -23,12 +26,18 @@ def main():
     os.makedirs(projectname + "/assets/js/")
     os.makedirs(projectname + "/assets/css/")
     os.makedirs(projectname + "/assets/img/")
+
+    # Attempt to set up the basic folder heirarchy
+    # Loop to input all packages the user desires, and download the package if supported
     package = raw_input("Enter a package name to add, 'none' to finish, or 'help': ")
     scripts = []
     css = []
     while package.lower() != "none":
         if len(package) > 0 and package.lower() != "help" and package.lower() != "h":
             os.makedirs(projectname + "/assets/js/packages/" + package)
+
+            # Bootstrap needs a special method of installation in order to place files in both
+            # CSS and JS folders
             if package.lower() == "bootstrap":
                 os.makedirs(projectname + "/assets/css/" + package)
                 print("Downloading Bootstrap from maxcdn...")
@@ -36,14 +45,18 @@ def main():
                 urllib.urlretrieve('https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js', projectname + '/assets/js/packages/' + package + '/bootstrap.min.js')
                 css.append('assets/css/' + package + '/bootstrap.min.css')
                 scripts.append('assets/js/packages/' + package + '/bootstrap.min.js')
+            # React behaves the same way as bootstrap, with 2 JS files
             if package.lower() == "react":
                 print("Downloading react and react dom 0.14.6 from fb.me...")
                 urllib.urlretrieve('https://fb.me/react-with-addons-0.14.6.js', projectname + '/assets/js/packages/' + package + '/react-with-addons-0.14.6.js')
                 urllib.urlretrieve('https://fb.me/react-dom-0.14.6.js', projectname + '/assets/js/packages/' + package + '/react-dom-0.14.6.js')
                 scripts.append('assets/js/packages/' + package + '/react-with-addons-0.14.6.js')
                 scripts.append('assets/js/packages/' + package + '/react-dom-0.14.6.js')
+
+            # Check if the entered package matches one of the stored libraries
             librarymatch = check_for_library_match(package.lower())
             if librarymatch != None:
+                # Separate out the filename
                 url = librarymatch.split('/')
                 filename = url[-1]
                 urllib.urlretrieve(librarymatch, projectname + '/assets/js/packages/' + package + '/' + filename)
@@ -62,6 +75,10 @@ def main():
 
 
 def get_root_dir():
+    '''
+    This function determines the root directory to change the working directory to.
+    returns: string of the root directory, in the format /Users/<username>/
+    '''
     currentdir = os.getcwd()
     currentdir = currentdir.split('/')
     rootdir = '/' + currentdir[1] + '/' + currentdir[2]
@@ -69,6 +86,11 @@ def get_root_dir():
 
 
 def check_for_library_match(package):
+    '''
+    This function checks if the package entered by the user matches one with a download link.
+    parameter: package (string): the string the user entered when prompted for a library to add (forced-lowercase)
+    returns: string: the URL to download, or None if no match is found
+    '''
     # TODO: load these names and urls from an external file
     if package == "jquery":
         print("Downloading jQuery 1.12.0 from http://code.jquery.com/jquery-1.12.0.js...")
@@ -84,6 +106,12 @@ def check_for_library_match(package):
 
 
 def create_files(projectname, scripts, css):
+    '''
+    This function generates the HTML, CSS, and JS files for use by the user.
+    parameter: projectname (string): the name of the project entered by the user
+    parameter: scripts (list): the list of all scripts needed to be linked
+    parameter: css (list): the list of all css files entered
+    '''
     os.chdir(projectname)
     htmlFile = open("index.html", "w")
     htmlFile.write("<!DOCTYPE html>\n<html>\n<head>\n")
@@ -100,6 +128,9 @@ def create_files(projectname, scripts, css):
 
 
 def create_js_file():
+    '''
+    Creates an empty JS file for use by the user. Called by create_files().
+    '''
     os.chdir("assets")
     os.chdir("js")
     jsFile = open("site.js", "w")
@@ -108,6 +139,9 @@ def create_js_file():
 
 
 def create_css_file():
+    '''
+    Creates a CSS file for use by the user. Called by create_css_file().
+    '''
     os.chdir(os.pardir)
     os.chdir("css")
     cssFile = open("site.css", "w")
@@ -116,6 +150,10 @@ def create_css_file():
 
 
 def display_help(projectname):
+    '''
+    Displays the help screen when the user requests it.
+    parameter: projectname (string): the name of the project entered by the user
+    '''
     os.system('clear')
     print("Project Name: " + projectname)
     print("\n---------------------- Help ----------------------")
@@ -156,6 +194,9 @@ def display_help(projectname):
 
 
 def print_welcome():
+    '''
+    Print the welcome screen for the user.
+    '''
     os.system('clear')
     print("------------- Web Heirarchy Generator ------------")
     print("By Keegan Donley\n")
@@ -164,6 +205,10 @@ def print_welcome():
     print("--------------------------------------------------\n")
 
 def save_setup(projectname):
+    '''
+    Prompts to save or delete the current configuration.
+    parameter: projectname (string): the name of the project entered by the user
+    '''
     os.system('clear')
     print("\nAlmost done!")
     save = raw_input("Type yes to save your work, or no to discard this configuration: ")
