@@ -25,7 +25,7 @@ def main():
         print(colors.FAIL + "Please enter a valid project name!" + colors.ENDC)
         projectname = raw_input("Enter your project name: ")
     folderlocation = 'Documents'
-    rootdir = get_root_dir
+    rootdir = get_root_dir()
 
     # Set the working directory to /Users/<username>/Documents
     # Only works currently if the script is run from a folder located below /Users/<username>/
