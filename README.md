@@ -59,7 +59,7 @@ if package.lower() == "bootstrap":
     scripts.append('/assets/js/packages/' + package + '/bootstrap.min.js')
 </pre>
 
-Changing the file location: The script will always navigate to your <code>/Docmuments/</code> folder. To change this, you can change
+Changing the file location: The script will always navigate to your <code>/Documents/</code> folder. To change this, you can change
 <code>folderlocation = 'Documents'</code> to something other than Documents, such as Desktop, Downloads, etc. Currently, these are the only directories that can be easily accessed.
 
 #### Generated Heirarchy
