@@ -82,6 +82,5 @@ ProjectName
 └── index.html
 </pre>
 
-#### Generated Heirarchy
-Deletion script:
+#### Deletion Script
 Running <code>web-delete.py</code> will allow you to enter the names of directories in the <code>/Documents/</code> folder to delete. Note: this will, of course, allow you to delete any folder in the directory, not only ones created using <code>web.py</code>.  
