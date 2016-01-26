@@ -61,3 +61,27 @@ if package.lower() == "bootstrap":
 
 Changing the file location: The script will always navigate to your <code>/Docmuments/</code> folder. To change this, you can change
 <code>folderlocation = 'Documents'</code> to something other than Documents, such as Desktop, Downloads, etc. Currently, these are the only directories that can be easily accessed.
+
+#### Generated Heirarchy
+The following is a sample heirarchy that could be generated:
+<pre>
+ProjectName
+├── assets
+│   ├── css
+│   │   ├── bootstrap
+│   │   │   └── bootstrap.min.css
+│   │   └── site.css
+│   ├── img
+│   └── js
+│       ├── packages
+│       │   ├── bootstrap
+│       │   │   └── bootstrap.min.js
+│       │   └── jquery
+│       │       └── jquery-1.12.0.js
+│       └── site.js
+└── index.html
+</pre>
+
+#### Generated Heirarchy
+Deletion script:
+Running <code>web-delete.py</code> will allow you to enter the names of directories in the <code>/Documents/</code> folder to delete. Note: this will, of course, allow you to delete any folder in the directory, not only ones created using <code>web.py</code>.  
