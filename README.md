@@ -15,7 +15,7 @@ an empty folder will be created in which you may place the files manually. Libra
 - Angular
 
 ##### Adding more libraries
-Adding further support is quite easy. All it takes currntly is an addition to the if statement that determines the library.
+Adding further support is quite easy. All it takes currently is an addition to the if statement that determines the library.
 For example:
 <pre>
 def check_for_library_match(package):
