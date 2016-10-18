@@ -109,13 +109,16 @@ def check_for_library_match(package):
     # TODO: load these names and urls from an external file
     if package == "jquery":
         print(colors.LOG + "Downloading jQuery 1.12.0 from http://code.jquery.com/jquery-1.12.0.js..." + colors.ENDC)
-        return 'http://code.jquery.com/jquery-1.12.0.js'
+        return "http://code.jquery.com/jquery-1.12.0.js"
     elif package == "isotope":
         print(colors.LOG + "Downloading isotopeJS 2.2.2 from cdnjs..." + colors.ENDC)
-        return 'http://cdnjs.cloudflare.com/ajax/libs/jquery.isotope/2.2.2/isotope.pkgd.min.js'
+        return "http://cdnjs.cloudflare.com/ajax/libs/jquery.isotope/2.2.2/isotope.pkgd.min.js"
     elif package == "angular":
         print(colors.LOG + "Downloading AngularJS 1.4.8 from googleapis.com..." + colors.ENDC)
-        return("https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js")
+        return "https://ajax.googleapis.com/ajax/libs/angularjs/1.4.8/angular.min.js"
+    elif package == "textup":
+		print(colors.LOG + "Downloading TextUp (latest) from github..." + colors.ENDC)
+		return "https://raw.githubusercontent.com/keegandonley/textUp/master/textup.js"
     else:
         return None
 
