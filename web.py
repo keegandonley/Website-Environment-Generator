@@ -144,7 +144,7 @@ def create_files(projectname, scripts, css):
     for i in range(len(css)):
         htmlFile.write("    <link rel='stylesheet' href='" + css[i] + "'>\n")
     htmlFile.write("    <link rel='stylesheet' href='assets/css/site.css'>\n")
-    htmlFile.write("</head>\n<body>\n\n</body>\n</html>")
+    htmlFile.write("</head>\n<body>\n<p>Hello world!<br>Your site was successfully created!</p>\n</body>\n</html>")
     htmlFile.close()
     create_js_file()
 
